@@ -1,6 +1,5 @@
 package edu.redwoods.cis18.scam.remotegardenproject2.be;
 
-
 import edu.redwoods.cis18.scam.remotegardenproject2.db.DatabaseManager;
 import jssc.SerialPort;
 import jssc.SerialPortException;
@@ -13,9 +12,11 @@ import java.time.format.DateTimeFormatter;
 public class ArduinoSerialPortObserver {
 
 	protected final SerialPort serialPort;
+	private DatabaseManager dbManager;  // Added to hold a reference to DatabaseManager
 
-	public ArduinoSerialPortObserver(String portName) {
-		serialPort = new SerialPort(portName);
+	public ArduinoSerialPortObserver(String portName, DatabaseManager dbManager) {
+		this.serialPort = new SerialPort(portName);
+		this.dbManager = dbManager;  // Initialize the DatabaseManager instance
 		try {
 			serialPort.openPort();
 			serialPort.setParams(SerialPort.BAUDRATE_9600,
@@ -56,8 +57,6 @@ public class ArduinoSerialPortObserver {
 		}
 
 		private void processLine(String line) {
-
-
 			try {
 				// Parsing the line
 				String sensorType = line.substring(0, line.indexOf("(")).trim();
@@ -70,8 +69,7 @@ public class ArduinoSerialPortObserver {
 				String formattedDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
 				// Insert data into the database
-				DatabaseManager.insertDataIntoDB(formattedDateTime, sensorType, sensorValue, percentage);
-
+				dbManager.insertDataIntoDB(formattedDateTime, sensorType, sensorValue, percentage);
 
 			} catch (Exception e) {
 				System.out.println("Error processing line: " + e.getMessage());
@@ -80,6 +78,7 @@ public class ArduinoSerialPortObserver {
 	}
 
 	public static void main(String[] args) {
-		new ArduinoSerialPortObserver("COM4");
+		DatabaseManager dbManager = new DatabaseManager("jdbc:mysql://localhost:3306/mydatabase", "user", "password");
+		new ArduinoSerialPortObserver("COM4", dbManager);
 	}
 }

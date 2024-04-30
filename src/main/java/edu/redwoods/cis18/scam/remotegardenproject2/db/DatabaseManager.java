@@ -28,7 +28,8 @@ public class DatabaseManager {
 		}
 	}
 
-	private void  insertDataIntoDB(String timestamp, String sensorType, int moistureLevel, double percentage) {
+	// Changed from private to public to allow access from ArduinoSerialPortObserver
+	public void insertDataIntoDB(String timestamp, String sensorType, int moistureLevel, double percentage) {
 		String sql = "INSERT INTO SoilMoisture (timestamp, sensor_type, moisture_level, percentage) VALUES (?, ?, ?, ?)";
 		try (Connection conn = DriverManager.getConnection(dbUrl, user, password);
 		     PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -42,7 +43,5 @@ public class DatabaseManager {
 		}
 	}
 
-	//needs more methods for data processing and database interfacing and information collation and other such thingies
+	// Additional methods can be added here
 }
-
-
