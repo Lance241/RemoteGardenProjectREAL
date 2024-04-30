@@ -1,44 +1,51 @@
 ![RemoteGarden](src/main/java/edu/redwoods/cis18/scam/projectlogo.jpg "Soil Moisture Sensor")
 
 ## Overview
-Welcome to the RemoteGarden, where we strive to digitally greenify your thumb! This project utilizes an Arduino Uno R3 to monitor soil moisture and reports it back to a Java-based backend—because even plants have gone digital.
+Welcome to the RemoteGarden, where we strive to digitally greenify your thumb! This project utilizes an Arduino Uno R3 to monitor soil moisture, reporting it back to a Java-based backend, with data stored in a MySQL database—because even plants have gone digital.
 
 ### What It Does
-The system reads moisture levels from a soil sensor and sends this data through the mystical ethers of USB to a Java application. This data can eventually be saved into a database.
+The system reads moisture levels from a soil sensor and sends this data through the mystical ethers of USB to a Java application. The data can eventually be saved in a MySQL database for trend analysis and historical tracking.
 
 ### Current Capabilities
 - **Arduino Readings**: Every second, our trusty Arduino reads how thirsty your plant is and sends this data serially.
-- **Java Application**: Receives this data and contemplates what life means when you're a byte flowing through copper.
-- **JavaFX Interface**: loads 
+- **Java Application**: Receives this data and processes it for database storage.
+- **Database Manager**: Data transfer post-processing initiated from inner class from `ArduinoSerialPortObserver`
+- **JavaFX Interface**: loads
 
-## Tier 1
-- **Database Integration**: Data needs to go somewhere more permanent than a volatile StringBuilder object.
-- **Data Processing**: Replace the primitive `processLine` method to do something more database-y.
-- **Refactor**: `CheckBoxListCell` needs to complete de-nesting from `Main.java`.
-- **JavaFX**: GUI Slides incoming.
+# Goals:
 
-## Tier 2
-- **Arduino Wifi Integration**: Because wires are so 1990s.
-- **Additional Sensors**: Why not make it more complicated?
+## -Tier 1
+- **Database Integration**: Implement MySQL for data storage. Implement database structures and queries
+- **Data Processing**: Enhanced `processLine` method in `ArduinoSerialPortObserver` to process and store data efficiently.
+- **Refactor**: clean up dir tree to remove redundant class files.
+- **JavaFX**: Confirm positive connection between GUI and DB
+- **Final Migration**: last call to migrate code from the first project
+
+## -Tier 2
+- **Arduino Wifi Integration**: Enable communication over WiFi to eliminate the need for wired connections.
+- **Additional Sensors**: Expand the system to include light and humidity sensors for comprehensive plant monitoring.
 
 ## Installation
-Just clone this baby and have Maven and JDK 22 ready. Run `mvn clean compile javafx:run` and pray to the coding gods the dependencies remain unfucked.
+1. Ensure Maven, MySQL and JDK 20 are installed.
+2. Clone the repository.
+3. Install MySQL and DBeaver:
+    - **MySQL**: Download and install from [MySQL's official page](https://dev.mysql.com/downloads/mysql/).
+    - **DBeaver**: Download and install from [DBeaver's official page](https://dbeaver.io/download/).
+    - Setup instructions are included in the 'Database Setup' section.
+4. Configure the database using the provided SQL script.
+5. Run `mvn clean compile javafx:run`.
+
+## Database Setup
+To set up your MySQL database: DON'T FORGET YOUR MYSQL USERNAME AND PASSWORD.
+1. Open DBeaver and connect to your local MySQL server.
 
 ## Contributions
-Feel free to fork, clone, and tinker. Pull requests that make the plants happier are always welcome. If you break it - congratulations! You now own both pieces.
-**PRIORITY**: Migration from [Remote-Garden-Project](https://github.com/Miaka2/Remote-Garden-Project) may not yet be complete. Prioritize migration over modification of your code until migration is complete and the [first project](https://github.com/Miaka2/Remote-Garden-Project "Optional title") can be properly abandoned.
+Contributions are welcomed. If you break something, you get to keep both pieces.
 
 ## Known Issues
-- aint got no database
-- Warnings about digits in module names – apparently Java thinks that problematic. Consider renaming cis18/ dir if necessary.
-- Unused setters in `MoistureAlertSystem` – probably will remain unused until JavaFX sliders in the GUI are coded to call setters. 
-- Unchecked generics – because who really checks those anyway?
-- gui ugly af
+- No reported issues with the new database integration.
+- Consider renaming `cis18/` directory if module name warnings persist.
+- GUI enhancements are ongoing.
 
-## Shit to maybe think about
-- gRPC
-- Spring Boot
-- MySQL (currently pursuing server solution)
-- JavaFX
 
 Happy coding. 🌱
