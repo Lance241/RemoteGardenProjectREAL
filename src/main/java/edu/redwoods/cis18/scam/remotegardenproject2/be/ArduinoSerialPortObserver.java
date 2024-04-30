@@ -68,8 +68,9 @@ public class ArduinoSerialPortObserver {
 				String formattedDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
 				// Insert data into the database
-				DatabaseManager.insert      //implement in DatabaseManager class file
-						(formattedDateTime, sensorType, sensorValue, percentage);   //RENAME method to interface with db
+				DatabaseManager.insertDataIntoDB(formattedDateTime, sensorType, sensorValue, percentage);
+
+
 			} catch (Exception e) {
 				System.out.println("Error processing line: " + e.getMessage());
 			}

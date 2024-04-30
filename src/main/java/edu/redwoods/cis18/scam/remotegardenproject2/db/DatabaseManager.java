@@ -14,10 +14,6 @@ public class DatabaseManager {
 		this.password = password;
 	}
 
-	public static void insert(String formattedDateTime, String sensorType, int sensorValue, double percentage) {
-		//skeleton code
-	}
-
 	public void performQuery(String query) {
 		try (Connection conn = DriverManager.getConnection(dbUrl, user, password);
 		     Statement stmt = conn.createStatement();

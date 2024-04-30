@@ -290,7 +290,7 @@ public class Main extends Application {
         }
     }
 
-    // Custom ListCell with a checkbox
+/*    // Custom ListCell with a checkbox
     private static class CheckBoxListCell<T> extends ListCell<T> {
         private final CheckBox checkBox = new CheckBox();
 
@@ -313,5 +313,5 @@ public class Main extends Application {
                 setGraphic(checkBox);
             }
         }
-    }
+    }*/
 }
