@@ -56,6 +56,8 @@ public class ArduinoSerialPortObserver {
 		}
 
 		private void processLine(String line) {
+
+
 			try {
 				// Parsing the line
 				String sensorType = line.substring(0, line.indexOf("(")).trim();

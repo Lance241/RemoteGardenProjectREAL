@@ -289,29 +289,4 @@ public class Main extends Application {
             }
         }
     }
-
-/*    // Custom ListCell with a checkbox
-    private static class CheckBoxListCell<T> extends ListCell<T> {
-        private final CheckBox checkBox = new CheckBox();
-
-        public CheckBoxListCell() {
-            checkBox.setOnAction(e -> {
-                T item = getItem();
-                if (item != null) {
-                    checkBox.setSelected(!checkBox.isSelected());
-                }
-            });
-        }
-
-        @Override
-        protected void updateItem(T item, boolean empty) {
-            super.updateItem(item, empty);
-            if (empty || item == null) {
-                setGraphic(null);
-            } else {
-                checkBox.setText(item.toString());
-                setGraphic(checkBox);
-            }
-        }
-    }*/
 }
